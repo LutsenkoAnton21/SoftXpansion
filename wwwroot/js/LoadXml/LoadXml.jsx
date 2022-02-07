@@ -3,6 +3,8 @@
     const [units, setUnit] = React.useState([]);
     const [url, setUrl] = React.useState();
     const [activeTeam, setActiveTeam] = React.useState();
+    const host = window.location.protocol + "//" + window.location.host;
+
 
     function loadedFile(e) {
         setUrl(e.target.files[0])
@@ -11,20 +13,19 @@
     function parseXml() {
         const data = new FormData();
         data.append('file', url);
-        fetch('https://localhost:44387/Home',
-                {
-                    method: "POST",
-                    body: data
-                
-                }
-            )
+        fetch(host +'/Home',
+            {
+                method: "POST",
+                body: data
+            }
+        )
             .then(response => response.json())
             .then((res) => {
                 setUnit(res)
                 setActiveTeam(res[0])
                 console.log(res)
             })
-            .catch(err => console.log('Request Failed', err));
+            .catch(err => console.log('Request Failed', err)); 
     }
 
     function changeActiveTeam(e) {
@@ -41,13 +42,7 @@
     return (
         <div>
             <input type="file" onChange={loadedFile} />
-            <select onChange={changeActiveTeam}>
-                {units.length > 0 && units.map(cat => (
-                    <option key={cat.id} value={cat.id}>{cat.title}</option>
-                ))
-                }
-            </select>
-
+            
             {
                 activeTeam && (
                     <div>
@@ -61,7 +56,7 @@
                             </thead>
                             <tbody>
                                 {activeTeam.employees.map(cat => (
-                                    <tr>
+                                    <tr key={cat.id}>
                                         <td>{cat.name}</td>
                                         <td>{cat.position}</td>
                                         <td>{cat.hireDate}</td>
@@ -72,6 +67,15 @@
                     </div>
                 )
             }
+
+            <div>
+                <select onChange={changeActiveTeam}>
+                    {units.length > 0 && units.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.title}</option>
+                    ))
+                    }
+                </select>
+            </div>
         </div>
     )
 
