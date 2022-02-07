@@ -1,0 +1,14 @@
+<Units>
+  <Unit Title ="DMS Team" >
+    <Employee Name="Ivanov I.I." Position="Lead Developer" HireDate="2012.12.12" />
+    <Employee Name="Petrov P.P." Position="Project Manager" HireDate="2014.01.01" />
+  </Unit>
+  <Unit Title ="Uvazhaemi Team">
+    <Employee Name="Ivanov" Position="Lead Developer" HireDate="2020.12.12" />
+    <Employee Name="Gutorov" Position="Lead Developer" HireDate="2012.12.21" />
+  </Unit>
+  <Unit Title ="Test 1">
+    <Employee Name="Katya" Position="qwerty" HireDate="2021.12.12" />
+    <Employee Name="Anton" Position="Krasava" HireDate="2021.08.21" />
+  </Unit>
+</Units>
