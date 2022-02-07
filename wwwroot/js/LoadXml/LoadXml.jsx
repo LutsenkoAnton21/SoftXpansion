@@ -3,6 +3,7 @@
     const [units, setUnit] = React.useState([]);
     const [url, setUrl] = React.useState();
     const [activeTeam, setActiveTeam] = React.useState();
+    const [error, setError] = React.useState();
     const host = window.location.protocol + "//" + window.location.host;
 
 
@@ -25,7 +26,12 @@
                 setActiveTeam(res[0])
                 console.log(res)
             })
-            .catch(err => console.log('Request Failed', err)); 
+            .then(
+                setError()
+            )
+            .catch((err) => {
+                setError(err)
+            });
     }
 
     function changeActiveTeam(e) {
@@ -42,7 +48,6 @@
     return (
         <div>
             <input type="file" onChange={loadedFile} />
-            
             {
                 activeTeam && (
                     <div>
@@ -76,6 +81,13 @@
                     }
                 </select>
             </div>
+
+            {error && (
+                <div>
+                    <p1>Please, choose XML file</p1>
+                </div>
+            )}
+
         </div>
     )
 
